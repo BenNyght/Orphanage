@@ -1,16 +1,22 @@
 {
   "name": "orphanage",
-  "publisher": "nyght.orphanage",
+  "publisher": "nyght",
   "displayName": "Orphanage",
   "description": "All your files, parentless and afraid.",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BenNyght/Orphanage.git"
+  },
   "engines": {
     "vscode": "^1.98.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "workspaceContains:orphanage.json"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [

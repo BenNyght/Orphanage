@@ -41,10 +41,7 @@ export function registerFlattenCommand(context: vscode.ExtensionContext) {
 	  // Process all files
 	  const allSourceFiles = getAllFiles(sourceAbsolute);
 	  for (const filePath of allSourceFiles) {
-		const fileName = path.basename(filePath);
-		const destFilePath = path.join(destAbsolute, fileName);
-
-		processAndCloneFile(filePath, destFilePath, config);
+		processAndCloneFile(filePath, destAbsolute, config);
 	  }
 
 	  vscode.window.showInformationMessage(`Flattened ${allSourceFiles.length} file(s) into "${config.destFolder}"!`);

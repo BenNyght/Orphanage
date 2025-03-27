@@ -1,4 +1,4 @@
-# Orphanage
+# Orphanage - VSCode Extension
 
 ## All your files, now parentless and afraid
 

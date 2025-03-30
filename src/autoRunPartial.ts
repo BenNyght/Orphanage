@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { getConfig } from './config/config';
 import { processAndCloneFile, removeSingleFile } from './fileProcessing/fileProcessor';
-import { getSelectedDestination, isAutoProcessEnabled, setAutoProcessEnabled } from './config/configState';
+import { getRootDestinationFolder, getSelectedDestination, isAutoProcessEnabled, setAutoProcessEnabled } from './config/configState';
 import { getRootWorkspaceFolder } from './util';
 
 let currentWatcher: vscode.FileSystemWatcher | undefined;
@@ -36,15 +36,16 @@ export function setupPartialAutoRun(context: vscode.ExtensionContext) {
     return;
   }
 
+  const rootDestinationFolder = getRootDestinationFolder();
   const workspaceFolder = getRootWorkspaceFolder();
   const config = getConfig();
-  if (!workspaceFolder || !config) {
+  if (!workspaceFolder || !config || !rootDestinationFolder) {
     return;
   }
 
   // Build copy paths
   const sourceAbsolute = path.join(workspaceFolder.uri.fsPath, config.sourceFolder);
-  const destAbsolute = path.join(workspaceFolder.uri.fsPath, selectedDestinationEntry.folderPath);
+  const destAbsolute = path.join(rootDestinationFolder, selectedDestinationEntry.folderPath);
   if (!fs.existsSync(destAbsolute)) {
     fs.mkdirSync(destAbsolute, { recursive: true });
   }

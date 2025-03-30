@@ -3,9 +3,9 @@ import * as fs from 'fs';
 import * as vscode from 'vscode';
 import { OrphanageConfig, getConfig } from '../config/config';
 import { rewriteImportsInTSFile } from './tsImportFlattener';
-import { getSelectedDestination } from '../config/configState';
-import { getRootWorkspaceFolder } from '../util';
+import { getRootDestinationFolder, getSelectedDestination } from '../config/configState';
 import { removeBlocksWithoutFlags } from './tsFlagPreprocessor';
+import { getRootWorkspaceFolder } from '../util';
 
 // Prefix on the front to know what can be deleted
 // PF = Processed File
@@ -16,9 +16,10 @@ const filePrefix: string = "PF_";
  */
 export function processAllFiles() {
   try {
+    const rootDestinationFolder = getRootDestinationFolder();
     const workspaceFolder = getRootWorkspaceFolder();
     const config = getConfig();
-    if (!workspaceFolder || !config) {
+    if (!workspaceFolder || !config || !rootDestinationFolder) {
       return;
     }
 
@@ -29,7 +30,7 @@ export function processAllFiles() {
     }
 
     const sourceAbsolute = path.join(workspaceFolder.uri.fsPath, config.sourceFolder);
-    const destAbsolute = path.join(workspaceFolder.uri.fsPath, selectedDestinationEntry.folderPath);
+    const destAbsolute = path.join(rootDestinationFolder, selectedDestinationEntry.folderPath);
     if (!fs.existsSync(sourceAbsolute)) {
       vscode.window.showErrorMessage(`Source folder does not exist: ${sourceAbsolute}`);
       return;

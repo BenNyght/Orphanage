@@ -47,6 +47,10 @@
 			border-bottom: 1px solid var(--vscode-settings-dropdownBorder, #808080);
 			margin: 1em 0;
 		}
+
+		.path {
+			width:100%;
+		}
 	</style>
 </head>
 
@@ -70,20 +74,28 @@
 		</label>
 	</div>
 
-	<hr/>
-
 	<div>
 		<button id="processAllBtn">Process/Flatten Now</button>
+	</div>
+
+	<hr/>
+
+	<label for="rootDestinationFolder">Root Project Folder:</label>
+	<div>
+		<input type="text" id="rootDestinationFolder" name="rootDestinationFolder" class="path"/>
 	</div>
 
 	<script>
 		const vscode = acquireVsCodeApi();
 
+		document.getElementById('rootDestinationFolder').value = '#ROOT_DESTINATION_FOLDER#';
+
 		const autoProcessToggleEl = document.getElementById('autoProcessToggleEl');
 		const debugModeToggleEl = document.getElementById('debugModeToggleEl');
 		const selectedDestinationEl = document.getElementById('selectedDestinationEl');
 		const processAllBtn = document.getElementById('processAllBtn');
-
+		const rootDestinationFolder = document.getElementById('rootDestinationFolder');
+		
 		autoProcessToggleEl.addEventListener('change', () => {
 			vscode.postMessage({
 				command: 'toggleAutoProcess',
@@ -102,6 +114,13 @@
 			vscode.postMessage({
 				command: 'selectedDestination',
 				value: selectedDestinationEl.value
+			});
+		});
+
+		rootDestinationFolder.addEventListener('change', () => {
+			vscode.postMessage({
+				command: 'setRootDestinationFolder',
+				value: rootDestinationFolder.value
 			});
 		});
 

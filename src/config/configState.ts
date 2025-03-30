@@ -1,5 +1,7 @@
 import * as vscode from 'vscode';
 import { DestinationEntry } from './config';
+import { getRootWorkspaceFolder } from '../util';
+import * as fs from 'fs';
 
 let extensionContext: vscode.ExtensionContext | null = null;
 
@@ -7,6 +9,7 @@ let extensionContext: vscode.ExtensionContext | null = null;
 const SELECTED_DEST_KEY = 'orphanage.selectedDestination';
 const AUTO_PROCESS_KEY = 'orphanage.autoProcess';
 const DEBUG_MODE_KEY = 'orphanage.debugMode';
+const DESTINATION_ROOT_KEY = "orphanage.destinationRoot";
 
 /** Call this once in your activate() function, passing the context. */
 export function initializeConfigState(context: vscode.ExtensionContext) {
@@ -71,9 +74,29 @@ export function setDebugEnabled(enabled: boolean): void {
 /** Retrieves whether or not file auto-processing is on */
 export function isDebugEnabled(): boolean {
 	if (!extensionContext) {
-		console.warn('Extension context not initialized, cannot get auto-process state.');
 		return false;
 	}
 
 	return extensionContext?.globalState.get<boolean>(DEBUG_MODE_KEY) ?? false;
+}
+
+/** Set root destination folder. The folder the selected destination is relative too */
+export function setRootDestinationFolder(rootDestinationFolder: string): void {
+	if (!extensionContext) {
+		console.warn('Extension context not initialized, cannot toggle auto-process state.');
+		return;
+	}
+
+	extensionContext?.globalState.update(DESTINATION_ROOT_KEY, rootDestinationFolder);
+}
+
+/** Get the root destination folder */
+export function getRootDestinationFolder(): string {
+	if (!extensionContext) {
+		return "";
+	}
+
+	const workspaceFolder = getRootWorkspaceFolder()?.uri.fsPath;
+	const destinationRootKeyValue = extensionContext?.globalState.get<string>(DESTINATION_ROOT_KEY);
+	return destinationRootKeyValue ?? workspaceFolder ?? "";
 }

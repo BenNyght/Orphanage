@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import { DestinationEntry } from '../config/config';
-import { getSelectedDestination, isAutoProcessEnabled, isDebugEnabled, setAutoProcessEnabled, setDebugEnabled, setSelectedDestination } from '../config/configState';
+import { getRootDestinationFolder, getSelectedDestination, isAutoProcessEnabled, isDebugEnabled, setDebugEnabled, setRootDestinationFolder, setSelectedDestination } from '../config/configState';
 import { setAutoProcessRunning } from '../autoRunPartial';
 import { processAllFiles } from '../fileProcessing/fileProcessor';
 
@@ -43,6 +43,10 @@ export class DestinationsWebviewProvider implements vscode.WebviewViewProvider {
                 case 'processAll':
                     processAllFiles();
                     break;
+                case 'setRootDestinationFolder':
+                    vscode.window.showInformationMessage(`Destination Root: ${message.value}`);
+                    setRootDestinationFolder(message.value);
+                    break;
             }
         });
 
@@ -76,6 +80,10 @@ export class DestinationsWebviewProvider implements vscode.WebviewViewProvider {
         // Build #DEBUG_MODE_CHECKED#
         const debugModeState = isDebugEnabled() ? 'checked' : '';
 
+        // Build #ROOT_DESTINATION_FOLDER#
+        const safePath = getRootDestinationFolder().replace(/\\/g, '\\\\');
+        const rootDestinationFolder = safePath;
+
         // Load Html
         const htmlFilePath = vscode.Uri.joinPath(this.context.extensionUri, 'media', 'extensionView.html');
         let html = fs.readFileSync(htmlFilePath.fsPath, 'utf-8');
@@ -84,6 +92,7 @@ export class DestinationsWebviewProvider implements vscode.WebviewViewProvider {
         html = html.replace('#OPTIONS#', optionsHtml);
         html = html.replace('#AUTO_FLATTEN_CHECKED#', autoFlattenState);
         html = html.replace('#DEBUG_MODE_CHECKED#', debugModeState);
+        html = html.replace('#ROOT_DESTINATION_FOLDER#', rootDestinationFolder);
 
         webview.html = html;
     }

@@ -1,28 +1,50 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
-import { readOrCreateConfig } from './config';
-import { OrphanageConfig } from './config';
+import { getConfig } from './config/config';
 import { processAndCloneFile, removeSingleFile } from './fileProcessing/fileProcessor';
+import { getSelectedDestination, isAutoProcessEnabled, setAutoProcessEnabled } from './config/configState';
+import { getRootWorkspaceFolder } from './util';
+
+let currentWatcher: vscode.FileSystemWatcher | undefined;
+let extensionContext: vscode.ExtensionContext;
+
+/**
+ * Update whether auto processing is running
+ */
+export function setAutoProcessRunning(enable: boolean) {
+  setAutoProcessEnabled(enable);
+  if (enable) {
+    const selectedDest = getSelectedDestination();
+    if (selectedDest) {
+      setupPartialAutoRun(extensionContext);
+    }
+  } else {
+    disposeWatcher();
+  }
+}
 
 /**
  * Setup to process files on file changes automatically. Cloning the files into the flattened directory
  */
 export function setupPartialAutoRun(context: vscode.ExtensionContext) {
-  const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
-  if (!workspaceFolder) {
-    vscode.window.showErrorMessage("No workspace folder is open.");
+  extensionContext = context;
+
+  const selectedDestinationEntry = getSelectedDestination();
+  if (!isAutoProcessEnabled() || !selectedDestinationEntry) {
+    disposeWatcher();
     return;
   }
 
-  const config: OrphanageConfig | null = readOrCreateConfig(workspaceFolder);
-  if (!config) {
+  const workspaceFolder = getRootWorkspaceFolder();
+  const config = getConfig();
+  if (!workspaceFolder || !config) {
     return;
   }
 
   // Build copy paths
   const sourceAbsolute = path.join(workspaceFolder.uri.fsPath, config.sourceFolder);
-  const destAbsolute = path.join(workspaceFolder.uri.fsPath, config.destFolder);
+  const destAbsolute = path.join(workspaceFolder.uri.fsPath, selectedDestinationEntry.folderPath);
   if (!fs.existsSync(destAbsolute)) {
     fs.mkdirSync(destAbsolute, { recursive: true });
   }
@@ -55,4 +77,16 @@ export function setupPartialAutoRun(context: vscode.ExtensionContext) {
 
   // Cleanup on deactivate
   context.subscriptions.push(watcher);
+
+  currentWatcher = watcher;
+}
+
+/**
+ * Dispose any existing watcher.
+ */
+export function disposeWatcher() {
+  if (currentWatcher) {
+    currentWatcher.dispose();
+    currentWatcher = undefined;
+  }
 }

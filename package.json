@@ -22,9 +22,31 @@
     "commands": [
       {
         "command": "Orphanage.flatten",
-        "title": "Flatten Project"
+        "title": "Orphanage: Flatten Project"
+      },
+      {
+        "command": "Orphanage.createConfig",
+        "title": "Orphanage: Create Default Config"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "orphanageContainer",
+          "title": "Orphanage",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "orphanageContainer": [
+        {
+          "type": "webview",
+          "id": "orphanageView",
+          "name": "Controls"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",

@@ -1,7 +1,7 @@
 import * as assert from 'assert';
 import * as fs from 'fs';
 import * as path from 'path';
-import { OrphanageConfig } from '../../config';
+import { OrphanageConfig } from '../../config/config';
 import { processAndCloneFile, removeSingleFile } from '../../fileProcessing/fileProcessor';
 
 suite('Partial Flatten Tests', () => {
@@ -12,7 +12,9 @@ suite('Partial Flatten Tests', () => {
   // Sample config
   const config: OrphanageConfig = {
     sourceFolder: 'src',
-    destFolder: 'dist',
+    destinations: [
+      { displayName: "Destination", folderPath: "dist" },
+    ],
     ignoreFlattenImports: ['node_modules']
   };
 

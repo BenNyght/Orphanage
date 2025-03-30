@@ -2,7 +2,7 @@ import * as assert from 'assert';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { OrphanageConfig, readOrCreateConfig } from '../../config';
+import { OrphanageConfig, getConfig } from '../../config/config';
 
 suite('Config Tests', () => {
   const testWorkspace = vscode.workspace.workspaceFolders?.[0];
@@ -28,7 +28,7 @@ suite('Config Tests', () => {
     }
 
     // Call readOrCreateConfig
-    const result: OrphanageConfig | null = readOrCreateConfig(mockWorkspace);
+    const result: OrphanageConfig | null = getConfig();
 
     // Because it didn't exist, readOrCreateConfig should create it and return null
     assert.strictEqual(result, null, 'Expected null on first creation');
@@ -58,16 +58,18 @@ suite('Config Tests', () => {
     const configPath = path.join(tempDir, 'orphanage.json');
     const sampleConfig: OrphanageConfig = {
       sourceFolder: 'foo',
-      destFolder: 'bar',
+      destinations: [
+        { displayName: "bar", folderPath: "bar" },
+      ],
       ignoreFlattenImports: ['baz']
     };
     fs.writeFileSync(configPath, JSON.stringify(sampleConfig), 'utf8');
 
     // readOrCreateConfig should return our existing config
-    const result = readOrCreateConfig(mockWorkspace);
+    const result = getConfig();
     assert.ok(result, 'Expected a config object');
     assert.strictEqual(result?.sourceFolder, 'foo');
-    assert.strictEqual(result?.destFolder, 'bar');
+    assert.strictEqual(result?.destinations[0], 'bar');
     assert.deepStrictEqual(result?.ignoreFlattenImports, ['baz']);
 
     // Clean up

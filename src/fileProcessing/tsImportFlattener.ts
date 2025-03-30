@@ -1,27 +1,34 @@
 import * as path from 'path';
+import { getNameWithPathPrefix } from './fileProcessor';
 
 /**
- * Rewrites relative imports in the given file content to single-level flattened form.
- * e.g., from '../../utils/something' => './something'
- * If an import path includes any ignore pattern or doesn't start with '.', skip rewriting.
+ * Rewrites relative imports in a TypeScript file to reference flattened filenames.
+ * e.g. from '../../utils/something' => './FF_utils_something.ts'
+ *
+ * @param fileContent The entire text of the .ts file
+ * @param ignorePatterns If an import path includes any string in this list, skip rewriting
+ * @param currentFilePath The absolute path of the .ts file being rewritten
  */
-export function rewriteImportsInTSFile(fileContent: string, ignorePatterns: string[]): string {
-  // Matches: from "..." or from '...'
-  const importRegex = /(\bfrom\s+['"])([^'"]+)(['"])/g;
+export function rewriteImportsInTSFile(
+	fileContent: string,
+	ignorePatterns: string[],
+	currentFilePath: string
+): string {
+	const importRegex = /(\bfrom\s+['"])([^'"]+)(['"])/g;
 
-  return fileContent.replace(importRegex, (match, prefix, importPath, suffix) => {
-	// If path doesn't start with '.', it's external or absolute -> skip
-	if (!importPath.startsWith('.')) {
-	  return match;
-	}
+	return fileContent.replace(importRegex, (match, prefix, importPath, suffix) => {
+		// If path doesn't start with '.' it's probably external/absolute => skip
+		if (!importPath.startsWith('.')) {
+			return match;
+		}
 
-	// If path is in ignore list -> skip
-	if (ignorePatterns.some(p => importPath.includes(p))) {
-	  return match;
-	}
+		if (ignorePatterns.some((p) => importPath.includes(p))) {
+			return match;
+		}
 
-	// Flatten to just the base name
-	const base = path.basename(importPath);
-	return `${prefix}./${base}${suffix}`;
-  });
+		const absoluteImport = path.resolve(path.dirname(currentFilePath), importPath);
+		const flattenedName = getNameWithPathPrefix(absoluteImport);
+		const newImportPath = `./${flattenedName}`;
+		return `${prefix}${newImportPath}${suffix}`;
+	});
 }

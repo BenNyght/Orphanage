@@ -3,7 +3,7 @@
   "publisher": "nyght",
   "displayName": "Orphanage",
   "description": "All your files, parentless and afraid.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/BenNyght/Orphanage.git"

@@ -6,6 +6,7 @@ import { isDebugEnabled } from './configState';
 export interface OrphanageConfig {
   sourceFolder: string;
   destinations: DestinationEntry[];
+  copyFromDestination: DestinationToSource[];
   ignoreFlattenImports?: string[];
   compileFlags?: string[];
 }
@@ -15,12 +16,20 @@ export interface DestinationEntry {
   folderPath: string;
 }
 
+export interface DestinationToSource {
+  destinationPath: string;
+  sourcePath: string;
+}
+
 // Default config if orphanage.json doesn't exist
 const DEFAULT_CONFIG: OrphanageConfig = {
   sourceFolder: "src",
   destinations: [
     { displayName: "Destination 1", folderPath: "dist1" },
     { displayName: "Destination 2", folderPath: "dist2" }
+  ],
+  copyFromDestination: [
+    { destinationPath: "types", sourcePath: "types" },
   ],
   compileFlags: [
     "EXAMPLE_COMPILE_FLAG"

@@ -36,6 +36,15 @@ export function processAllFiles() {
       return;
     }
 
+    // Copy destinaton to source files listed in config
+    for (let index = 0; index < config.copyFromDestination.length; index++) {
+      const paths = config.copyFromDestination[index];
+      const configDestAbsolute = path.join(destAbsolute, paths.destinationPath);
+      const configSourceAbsolute = path.join(workspaceFolder.uri.fsPath, paths.sourcePath);
+      clearDestination(configSourceAbsolute);
+      copyFolderRecursive(configDestAbsolute, configSourceAbsolute);
+    }
+
     // Clear destination folder
     clearDestination(destAbsolute);
 
@@ -85,6 +94,33 @@ export function removeSingleFile(sourcePath: string, destAbsolute: string) {
 }
 
 /**
+ * Recursively copies all files and subdirectories from the source to the destination folder.
+ * Creates the destination folder if it doesn't exist.
+ */
+export function copyFolderRecursive(sourceFolder: string, destinationFolder: string): void {
+  if (!fs.existsSync(sourceFolder)) {
+      throw new Error(`Source folder does not exist: ${sourceFolder}`);
+  }
+
+  if (!fs.existsSync(destinationFolder)) {
+      fs.mkdirSync(destinationFolder, { recursive: true });
+  }
+
+  const entries = fs.readdirSync(sourceFolder, { withFileTypes: true });
+
+  for (const entry of entries) {
+      const srcPath = path.join(sourceFolder, entry.name);
+      const destPath = path.join(destinationFolder, entry.name);
+
+      if (entry.isDirectory()) {
+          copyFolderRecursive(srcPath, destPath);
+      } else {
+          fs.copyFileSync(srcPath, destPath);
+      }
+  }
+}
+
+/**
  * Recursively collects all file paths within a given directory (including subdirectories).
  */
 export function getAllFiles(dirPath: string): string[] {
@@ -106,6 +142,10 @@ export function getAllFiles(dirPath: string): string[] {
  * Clear all generated files in destination dir
  */
 export function clearDestination(dirPath: string): void {
+  if (!fs.existsSync(dirPath)) {
+    return;
+  }
+
   const entries = fs.readdirSync(dirPath, { withFileTypes: true });
   for (const entry of entries) {
     if (entry.isFile() && entry.name.startsWith(filePrefix)) {

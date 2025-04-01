@@ -23,7 +23,7 @@
    - Set an array of patterns (e.g., `node_modules`) in `orphanage.json` to skip rewriting specific import paths.
 5. **Compile Flag Processing**:
    - Need some code to disabled and enable based on the destination? You can setup compile flags in the config to strip away code.
-6. **Copy From Destiation**:
+6. **Copy From Destination**:
    - Have files automatically copy back to your working space based on your target destination. This can be useful if you need to copy back files to link to.
 
 ## Controls/View

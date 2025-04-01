@@ -1,13 +1,6 @@
 # Orphanage - VSCode Extension
 
-## All your files, now parentless and afraid
-
-**Orphanage** is a Visual Studio Code extension that **flattens** your project files into a single-level directory. Its main features include:
-
-- **Manual Flatten**: Copy (and optionally rewrite imports in) all files from a source folder into a single-level destination folder.
-- **Partial Auto-Run**: Watch the source folder and update only changed files in the destination, keeping everything in sync.
-- **Flexible Configuration**: Reads an `orphanage.json` in your workspace root to define source/destination paths and ignored imports.
-
+**Orphanage** is a VSCode extension that **flattens** your project files into a single-level directory.
 
 ## Table of Contents
 

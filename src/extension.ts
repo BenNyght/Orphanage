@@ -4,6 +4,7 @@ import { DestinationsWebviewProvider } from './views/extensionView';
 import { OrphanageConfig, getConfig } from './config/config';
 import { getSelectedDestination, initializeConfigState } from './config/configState';
 import { registerCreateConfigCommand, registerProcessCommand } from './commands';
+import { activateTSLanaguageBlocks } from './languageService/tsLanguageStyle';
 
 export function activate(context: ExtensionContext) {
   // Always register create config command for project setup
@@ -34,6 +35,9 @@ export function activate(context: ExtensionContext) {
 
   // Register Commands
   registerProcessCommand(context);
+
+  // Enable language blocks
+  activateTSLanaguageBlocks(context);
 }
 
 export function deactivate() {

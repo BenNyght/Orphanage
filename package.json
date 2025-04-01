@@ -8,6 +8,7 @@
     "type": "git",
     "url": "https://github.com/BenNyght/Orphanage.git"
   },
+  "icon": "media/icon.png",
   "engines": {
     "vscode": "^1.98.0"
   },
@@ -15,7 +16,9 @@
     "Other"
   ],
   "activationEvents": [
-    "workspaceContains:orphanage.json"
+    "workspaceContains:orphanage.json",
+    "onLanguage:typescript",
+    "onLanguage:javascript"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -41,6 +44,7 @@
     "views": {
       "orphanageContainer": [
         {
+          "icon": "media/icon.svg",
           "type": "webview",
           "id": "orphanageView",
           "name": "Controls"
@@ -60,7 +64,8 @@
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/vscode": "^1.98.0",

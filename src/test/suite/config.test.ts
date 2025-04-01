@@ -61,6 +61,9 @@ suite('Config Tests', () => {
       destinations: [
         { displayName: "bar", folderPath: "bar" },
       ],
+      copyFromDestination: [
+        { destinationPath: "types", sourcePath: "types" },
+      ],
       ignoreFlattenImports: ['baz']
     };
     fs.writeFileSync(configPath, JSON.stringify(sampleConfig), 'utf8');

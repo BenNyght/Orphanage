@@ -8,6 +8,7 @@
 - **Partial Auto-Run**: Watch the source folder and update only changed files in the destination, keeping everything in sync.
 - **Flexible Configuration**: Reads an `orphanage.json` in your workspace root to define source/destination paths and ignored imports.
 
+
 ## Table of Contents
 
 1. [Features](#features)  
@@ -27,6 +28,18 @@
    - For `.ts` or `.tsx` files, relative import paths are updated to reflect the flattened file structure (e.g., `../../utils/foo` → `./foo`).
 4. **Ignore Certain Imports**  
    - Set an array of patterns (e.g., `node_modules`) in `orphanage.json` to skip rewriting specific import paths.
+5. **Compile Flag Processing**:
+   - Need some code to disabled and enable based on the destination? You can setup compile flags in the config to strip away code.
+6. **Copy From Destiation**:
+   - Have files automatically copy back to your working space based on your target destination. This can be useful if you need to copy back files to link to.
+
+## Controls/View
+
+The extension provides a side view panel for easy swapping of current destination, and toggling of user preferences.
+
+The Root Project Folder defines where the destinations are relative to. This is defined per user.
+
+![image info](./media/orphanageControls.png)
 
 ## Installation
 
@@ -59,16 +72,33 @@
 
      ```jsonc
      {
-       "sourceFolder": "src",
-       "destFolder": "dist",
-       "ignoreFlattenImports": [
-         "fake-import",
-         "test_import"
-       ]
-     }
+         "sourceFolder": "src",
+         "destinations": [
+            {
+               "displayName": "Horizon World Folder",
+               "folderPath": "New world_9494984697284707\\scripts\\"
+            },
+            {
+               "displayName": "Destination 2",
+               "folderPath": "flattened2"
+            }
+         ],
+         "copyFromDestination": [
+            {
+               "destinationPath": "types",
+               "sourcePath": "types"
+            }
+         ],
+         "compileFlags": [
+            "DEBUG_BLOCK"
+         ],
+         "ignoreFlattenImports": [
+            "node_modules"
+         ]
+      }
      ```
 
-   - If `orphanage.json` is missing, Orphanage creates one with default values.
+   - If `orphanage.json` is missing, run the **Orphanage.createConfig** command to generate a default config.
 
 ## Building from Source
 
@@ -107,19 +137,41 @@
 
 
 ## Project Configuration
+
 The orphanage.json file can define:
+
 - sourceFolder: Where your original files live.
-- destFolder: Where the flattened files are copied.
+- destinations: Define the display name for the destination and the path to flatten to.
+- copyFromDestination: Folders to copy back from the current destination and where to clone them to in the sourceFolder.
+- compileFlags: Arrary of compile flags, if a flag block is defined in code without being define in the config, it will be removed from the code when flattened.
 - ignoreFlattenImports (optional): Array of strings to skip rewriting in imports.
 
 **Example:**
+
 ```jsonc
 {
-  "sourceFolder": "src",
-  "destFolder": "dist",
-  "ignoreFlattenImports": [
-    "node_modules",
-    "@alias/"
-  ]
+   "sourceFolder": "src",
+   "destinations": [
+      {
+         "displayName": "Horizon World Folder",
+         "folderPath": "New world_9494984697284707\\scripts\\"
+      },
+      {
+         "displayName": "Destination 2",
+         "folderPath": "flattened2"
+      }
+   ],
+   "copyFromDestination": [
+      {
+         "destinationPath": "types",
+         "sourcePath": "types"
+      }
+   ],
+   "compileFlags": [
+      "DEBUG_BLOCK"
+   ],
+   "ignoreFlattenImports": [
+      "node_modules"
+   ]
 }
 ```

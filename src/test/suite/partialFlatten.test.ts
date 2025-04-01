@@ -15,6 +15,9 @@ suite('Partial Flatten Tests', () => {
     destinations: [
       { displayName: "Destination", folderPath: "dist" },
     ],
+    copyFromDestination: [
+      { destinationPath: "types", sourcePath: "types" },
+    ],
     ignoreFlattenImports: ['node_modules']
   };
 

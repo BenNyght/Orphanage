@@ -70,6 +70,10 @@ export function processAndCloneFile(sourcePath: string, destAbsolute: string, co
   const fileName = getNameWithPathPrefix(sourcePath);
   const destFilePath = path.join(destAbsolute, fileName);
 
+  if (fs.existsSync(destFilePath)) {
+    fs.unlinkSync(destFilePath);
+  }
+
   if (fileName.endsWith('.ts') || fileName.endsWith('.tsx')) {
     const content = fs.readFileSync(sourcePath, 'utf-8');
     let updated = rewriteImportsInTSFile(content, config.ignoreFlattenImports ?? [], sourcePath);

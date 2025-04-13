@@ -4,12 +4,15 @@
 
 ## Table of Contents
 
-1. [Features](#features)  
-2. [Installation](#installation)  
-3. [Usage](#usage)  
-4. [Building from Source](#building-from-source)  
-5. [Running Tests](#running-tests)  
-6. [Configuration](#project-configuration)  
+1. [Additional Documentation](#additionl-documentation)
+2. [Features](#features)  
+3. [Installation](#installation)  
+4. [Usage](#usage)
+
+## Additionl Documentation
+
+- [Building and Running Tests](./documentation/BuildingAndTests.md)
+- [Orphanage Config Layout](./documentation/OrphanageConfigLayout.md)
 
 ## Features
 
@@ -26,30 +29,17 @@
 6. **Copy From Destination**:
    - Have files automatically copy back to your working space based on your target destination. This can be useful if you need to copy back files to link to.
 
-## Controls/View
+## Usage
+
+### Extension Panel
 
 The extension provides a side view panel for easy swapping of current destination, and toggling of user preferences.
 
 The Root Project Folder defines where the destinations are relative to. This is defined per user.
 
-![image info](./media/orphanageControls.png)
+![image info](./documentation/orphanageControls.png)
 
-## Installation
-
-### A. From VSIX Package
-
-1. **Obtain** the `.vsix` file (from a release or by building with `vsce package`).
-2. In VS Code, press <kbd>Ctrl+Shift+P</kbd> (Windows/Linux) or <kbd>Cmd+Shift+P</kbd> (Mac) → select **“Extensions: Install from VSIX...”**.
-3. Browse to and **select** the `.vsix` file.
-4. **Reload** VS Code if prompted.
-
-### B. From Source (Extension Development Host)
-
-1. **Clone** or **download** this repo.
-2. **Open** the folder in VS Code.
-3. Press <kbd>F5</kbd> to launch a new **Extension Development Host** with Orphanage loaded.
-
-## Usage
+### Configuration
 
 1. **Manual Flatten**  
    - Open the **Command Palette** (<kbd>Ctrl+Shift+P</kbd> or <kbd>Cmd+Shift+P</kbd>) and search for **“Flatten Project”** or “**Orphanage.flatten**”.
@@ -92,79 +82,32 @@ The Root Project Folder defines where the destinations are relative to. This is 
      ```
 
    - If `orphanage.json` is missing, run the **Orphanage.createConfig** command to generate a default config.
+   - Checkout [Orphanage Config Layout](./documentation/OrphanageConfigLayout.md) for how this config file is laid out.
 
-## Building from Source
+## Installation
 
-1. **Prerequisites**  
-   - [Node.js](https://nodejs.org/)  
-   - [npm](https://www.npmjs.com/)  
-   - [VS Code](https://code.visualstudio.com/)
+### A. From VSIX Package
 
-2. **Install dependencies**  
-	```bash
-	npm install
-	```
+1. Obtain the `.vsix` file (from a release or by building with `vsce package`).
+2. In VS Code, press <kbd>Ctrl+Shift+P</kbd> (Windows/Linux) or <kbd>Cmd+Shift+P</kbd> (Mac) → select **“Extensions: Install from VSIX...”**.
+3. Browse to and **select** the `.vsix` file.
+4. Reload VS Code if prompted.
 
-3. **Compile**
-	```bash
-	npm run compile
-	```
+### B. Embeded in Project
 
-4. **(Optional) Package as VSIX**
-	```bash
-	npm install -g vsce
-	vsce package
-	```
+1. Create a folder for the extension in the `.vscode/extensions` directory of your project.<br>
+For example `.vscode/extensions/orphanage`
 
-## Running Tests
-1. **Compile & test together:**
-	```bash
-	npm test
-	```
-	- This uses the default Mocha-based test runner with ```@vscode/test-electron```.
+2. Obtain the `.vsix` file (from a release or by building with `vsce package`).
 
-2. **View** results in the terminal, or open the Test Explorer in VS Code (depending on your setup).
+3. Open the VSIX file in a file archiver (i.e 7-Zip)
 
-3. **Integration**
-	- If you have special test configs, you can press <kbd>F5</kbd> and select “Extension Tests” in the debug dropdown to run them in a dedicated Extension Development Host.
+4. Move (copy) files from the extension directory in the archive into `.vscode/extensions/orphanage` (created earlier on step 1)
 
+5. Open your project in VSCode. If you didn't disable notifications, VSCode will suggest your to install workspace recommended extension. Click on **Install** button. Alternatively, find the extension in the EXTENSIONS list and click Install Workspace Extension.
 
-## Project Configuration
+### C. From Source (Extension Development Host)
 
-The orphanage.json file can define:
-
-- sourceFolder: Where your original files live.
-- destinations: Define the display name for the destination and the path to flatten to.
-- copyFromDestination: Folders to copy back from the current destination and where to clone them to in the sourceFolder.
-- compileFlags: Arrary of compile flags, if a flag block is defined in code without being define in the config, it will be removed from the code when flattened.
-- ignoreFlattenImports (optional): Array of strings to skip rewriting in imports.
-
-**Example:**
-
-```jsonc
-{
-   "sourceFolder": "src",
-   "destinations": [
-      {
-         "displayName": "Horizon World Folder",
-         "folderPath": "New world_9494984697284707\\scripts\\"
-      },
-      {
-         "displayName": "Destination 2",
-         "folderPath": "flattened2"
-      }
-   ],
-   "copyFromDestination": [
-      {
-         "destinationPath": "types",
-         "sourcePath": "types"
-      }
-   ],
-   "compileFlags": [
-      "DEBUG_BLOCK"
-   ],
-   "ignoreFlattenImports": [
-      "node_modules"
-   ]
-}
-```
+1. Clone or download this repo.
+2. Open the folder in VS Code.
+3. Press <kbd>F5</kbd> to launch a new **Extension Development Host** with Orphanage loaded.

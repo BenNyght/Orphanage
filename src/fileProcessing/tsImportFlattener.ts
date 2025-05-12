@@ -12,7 +12,6 @@ import { getNameWithPathPrefix } from './fileProcessor';
  */
 export function rewriteImportsInTSFile(
   fileContent: string,
-  ignorePatterns: string[],
   currentFilePath: string
 ): string {
   const importRegex = /(\bfrom\s+['"])([^'"]+)(['"])/g;
@@ -21,11 +20,6 @@ export function rewriteImportsInTSFile(
     // Only rewrite relative paths (starting with './' or '../').
     // Anything else is likely an NPM package or absolute import.
     if (!importPath.startsWith('.')) {
-      return match;
-    }
-
-    // Skip if it matches any ignore pattern
-    if (ignorePatterns.some((p) => importPath.includes(p))) {
       return match;
     }
 

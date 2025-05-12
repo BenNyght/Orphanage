@@ -13,21 +13,23 @@
 
 - [Building and Running Tests](./documentation/BuildingAndTests.md)
 - [Orphanage Config Layout](./documentation/OrphanageConfigLayout.md)
+- [Ignoring Files](./documentation/IgnoringFiles.md)
+- [Compile Flags](./documentation/CompileFlags.md)
 
 ## Features
 
-1. **Flatten on Demand**  
+1. **Flatten on Demand**:
    - Use the `Orphanage.flatten` command (or “Flatten Project” in the Command Palette) to copy all files from a `sourceFolder` into a `destFolder`.
-2. **Auto File Sync**  
+2. **Auto File Sync**:
    - When you add, edit, or delete files in `sourceFolder`, Orphanage updates only those files in the destination after a short delay.
-3. **Import Rewriting**  
+3. **Import Rewriting**:
    - For `.ts` or `.tsx` files, relative import paths are updated to reflect the flattened file structure (e.g., `../../utils/foo` → `./foo`).
-4. **Ignore Certain Imports**  
-   - Set an array of patterns (e.g., `node_modules`) in `orphanage.json` to skip rewriting specific import paths.
-5. **Compile Flag Processing**:
+4. **Compile Flag Processing**:
    - Need some code to disabled and enable based on the destination? You can setup compile flags in the config to strip away code.
-6. **Copy From Destination**:
+5. **Copy From Destination**:
    - Have files automatically copy back to your working space based on your target destination. This can be useful if you need to copy back files to link to.
+6. **Ignore Files**:
+   - Often you have files in your project you don't want to have flattened and processed. `.orphanageIgnore` files can be used to ignore any files. Following the same formatting rules at `.gitignore`
 
 ## Usage
 
@@ -59,11 +61,17 @@ The Root Project Folder defines where the destinations are relative to. This is 
          "destinations": [
             {
                "displayName": "Horizon World Folder",
-               "folderPath": "New world_9494984697284707\\scripts\\"
+               "folderPath": "New world_9494984697284707\\scripts\\",
+               "compileFlags": [
+                  "COMPILE_FLAG_1"
+               ]
             },
             {
                "displayName": "Destination 2",
-               "folderPath": "flattened2"
+               "folderPath": "flattened2",
+               "compileFlags": [
+                  "COMPILE_FLAG_2"
+               ]
             }
          ],
          "copyFromDestination": [
@@ -73,10 +81,7 @@ The Root Project Folder defines where the destinations are relative to. This is 
             }
          ],
          "compileFlags": [
-            "DEBUG_BLOCK"
-         ],
-         "ignoreFlattenImports": [
-            "node_modules"
+            "COMPILE_FLAG_3"
          ]
       }
      ```

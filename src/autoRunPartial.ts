@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { getConfig } from './config/config';
 import { processAndCloneFile, removeSingleFile } from './fileProcessing/fileProcessor';
-import { getRootDestinationFolder, getSelectedDestination, isAutoProcessEnabled, setAutoProcessEnabled } from './config/configState';
+import { getAllCompileFlags, getRootDestinationFolder, getSelectedDestination, isAutoProcessEnabled, setAutoProcessEnabled } from './config/configState';
 import { getRootWorkspaceFolder } from './util';
 
 let currentWatcher: vscode.FileSystemWatcher | undefined;
@@ -65,10 +65,14 @@ export function setupPartialAutoRun(context: vscode.ExtensionContext) {
 
   // CREATE or CHANGE => Flatten only that one file
   watcher.onDidCreate(uri => {
-    schedule(() => processAndCloneFile(uri.fsPath, destAbsolute, config));
+    schedule(() => {
+      processAndCloneFile(uri.fsPath, destAbsolute, getAllCompileFlags(), workspaceFolder.uri.fsPath);
+    });
   });
   watcher.onDidChange(uri => {
-    schedule(() => processAndCloneFile(uri.fsPath, destAbsolute, config));
+    schedule(() => {
+      processAndCloneFile(uri.fsPath, destAbsolute, getAllCompileFlags(), workspaceFolder.uri.fsPath);
+    });
   });
 
   // DELETE => Remove that one file

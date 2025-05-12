@@ -17,8 +17,7 @@ suite('Partial Flatten Tests', () => {
     ],
     copyFromDestination: [
       { destinationPath: "types", sourcePath: "types" },
-    ],
-    ignoreFlattenImports: ['node_modules']
+    ]
   };
 
   setup(() => {
@@ -42,7 +41,7 @@ suite('Partial Flatten Tests', () => {
     const content = `import foo from '../foo'; import nodeDep from 'node_modules/lib';`;
     fs.writeFileSync(sourceFile, content, 'utf8');
 
-    processAndCloneFile(sourceFile, destDir, config);
+    processAndCloneFile(sourceFile, destDir, [], tempDir);
 
     const copiedPath = path.join(destDir, 'example.ts');
     assert.ok(fs.existsSync(copiedPath), 'File not copied');
@@ -57,7 +56,7 @@ suite('Partial Flatten Tests', () => {
     const sourceFile = path.join(tempDir, 'example.js');
     fs.writeFileSync(sourceFile, `console.log("test");`, 'utf8');
 
-    processAndCloneFile(sourceFile, destDir, config);
+    processAndCloneFile(sourceFile, destDir, [], tempDir);
 
     const copiedPath = path.join(destDir, 'example.js');
     assert.ok(fs.existsSync(copiedPath), 'JS file not copied');

@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { DestinationEntry } from './config';
+import { DestinationEntry, getConfig } from './config';
 import { getRootWorkspaceFolder } from '../util';
 import * as fs from 'fs';
 
@@ -99,4 +99,11 @@ export function getRootDestinationFolder(): string {
 	const workspaceFolder = getRootWorkspaceFolder()?.uri.fsPath;
 	const destinationRootKeyValue = extensionContext?.globalState.get<string>(DESTINATION_ROOT_KEY);
 	return destinationRootKeyValue ?? workspaceFolder ?? "";
+}
+
+//** Get all compile flags, project and target */
+export function getAllCompileFlags(): string[] {
+  const selectedCompileFlags = getSelectedDestination()?.compileFlags ?? [];
+  const projectCompileFlags = getConfig()?.compileFlags ?? [];
+  return selectedCompileFlags.concat(projectCompileFlags);
 }

@@ -7,13 +7,13 @@ export interface OrphanageConfig {
   sourceFolder: string;
   destinations: DestinationEntry[];
   copyFromDestination: DestinationToSource[];
-  ignoreFlattenImports?: string[];
   compileFlags?: string[];
 }
 
 export interface DestinationEntry {
   displayName: string;
   folderPath: string;
+  compileFlags?: string[];
 }
 
 export interface DestinationToSource {
@@ -25,16 +25,15 @@ export interface DestinationToSource {
 const DEFAULT_CONFIG: OrphanageConfig = {
   sourceFolder: "src",
   destinations: [
-    { displayName: "Destination 1", folderPath: "dist1" },
-    { displayName: "Destination 2", folderPath: "dist2" }
+    { displayName: "Destination 1", folderPath: "dist1", compileFlags: ["COMPILE_FLAG_1"] },
+    { displayName: "Destination 2", folderPath: "dist2", compileFlags: ["COMPILE_FLAG_2"] }
   ],
   copyFromDestination: [
     { destinationPath: "types", sourcePath: "types" },
   ],
   compileFlags: [
-    "EXAMPLE_COMPILE_FLAG"
-  ],
-  ignoreFlattenImports: ["node_modules"]
+    "COMPILE_FLAG_3"
+  ]
 };
 
 export function getConfig(): OrphanageConfig | null {

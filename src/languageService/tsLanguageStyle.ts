@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { getConfig } from '../config/config';
+import { getAllCompileFlags, getSelectedDestination } from '../config/configState';
 
 const inactiveDecorationType = vscode.window.createTextEditorDecorationType({
   opacity: '0.5'
@@ -26,8 +27,7 @@ export function activateTSLanaguageBlocks(context: vscode.ExtensionContext) {
 
     vscode.languages.registerFoldingRangeProvider({ language: 'typescript', scheme: 'file' }, {
       provideFoldingRanges(document, _context, _token) {
-        const config = getConfig();
-        const activeBlocks = config?.compileFlags ?? [];
+        const activeBlocks = getAllCompileFlags();
         const text = document.getText();
         const ranges: vscode.FoldingRange[] = [];
         const inactiveRanges = getInactiveRanges(text, activeBlocks);
@@ -55,8 +55,7 @@ function updateInactiveDecorations(editor: vscode.TextEditor) {
 	return;
   }
 
-  const config = getConfig();
-  const activeBlocks = config?.compileFlags ?? [];
+  const activeBlocks = getAllCompileFlags();
   const text = editor.document.getText();
   const inactiveRanges = getInactiveRanges(text, activeBlocks);
   const decorations: vscode.DecorationOptions[] = [];

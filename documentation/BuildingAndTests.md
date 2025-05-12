@@ -32,7 +32,7 @@
  npm test
  ```
 
-	- This uses the default Mocha-based test runner with ```@vscode/test-electron```.
+- This uses the default Mocha-based test runner with ```@vscode/test-electron```.
 
 2. **View** results in the terminal, or open the Test Explorer in VS Code (depending on your setup).
 

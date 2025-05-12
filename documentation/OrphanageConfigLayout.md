@@ -6,7 +6,6 @@ The orphanage.json file can define:
 - destinations: Define the display name for the destination and the path to flatten to.
 - copyFromDestination: Folders to copy back from the current destination and where to clone them to in the sourceFolder.
 - compileFlags: Arrary of compile flags, if a flag block is defined in code without being define in the config, it will be removed from the code when flattened.
-- ignoreFlattenImports (optional): Array of strings to skip rewriting in imports.
 
 **Example:**
 
@@ -16,11 +15,17 @@ The orphanage.json file can define:
    "destinations": [
       {
          "displayName": "Horizon World Folder",
-         "folderPath": "New world_9494984697284707\\scripts\\"
+         "folderPath": "New world_9494984697284707\\scripts\\",
+         "compileFlags": [
+            "COMPILE_FLAG_1"
+         ]
       },
       {
          "displayName": "Destination 2",
-         "folderPath": "flattened2"
+         "folderPath": "flattened2",
+         "compileFlags": [
+            "COMPILE_FLAG_2"
+         ]
       }
    ],
    "copyFromDestination": [
@@ -30,10 +35,7 @@ The orphanage.json file can define:
       }
    ],
    "compileFlags": [
-      "DEBUG_BLOCK"
-   ],
-   "ignoreFlattenImports": [
-      "node_modules"
+      "COMPILE_FLAG_3"
    ]
 }
 ```

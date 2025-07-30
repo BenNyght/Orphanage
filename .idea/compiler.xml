@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="orphanage-rider-plugin" target="23" />
+      <module name="orphanage-rider-plugin.main" target="17" />
+      <module name="orphanage-rider-plugin.test" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

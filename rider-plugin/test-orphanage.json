@@ -1,0 +1,28 @@
+{
+  "sourceFolder": "src",
+  "useFilePrefix": false,
+  "ignoreFlattenImports": [
+    "node_modules",
+    "@types/",
+    "react"
+  ],
+  "destinations": [
+    {
+      "displayName": "Test Destination 1",
+      "folderPath": "test-dest1",
+      "compileFlags": ["TEST_FLAG_1"]
+    },
+    {
+      "displayName": "Test Destination 2", 
+      "folderPath": "test-dest2",
+      "compileFlags": ["TEST_FLAG_2"]
+    }
+  ],
+  "copyFromDestination": [
+    {
+      "destinationPath": "types",
+      "sourcePath": "types"
+    }
+  ],
+  "compileFlags": ["GLOBAL_FLAG"]
+}

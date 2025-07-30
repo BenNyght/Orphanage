@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<idea-plugin>
+    <id>com.nyght.orphanage</id>
+    <name>Orphanage</name>
+    <vendor email="support@nyght.com" url="https://github.com/BenNyght/Orphanage">Nyght</vendor>
+
+    <description><![CDATA[
+    <p><strong>Orphanage</strong> is a JetBrains Rider plugin that <strong>flattens</strong> your project files into a single-level directory.</p>
+    
+    <h3>Features</h3>
+    <ul>
+        <li><strong>Flatten on Demand</strong>: Use the "Orphanage: Flatten Project" action to copy all files from a source folder into destination folders.</li>
+        <li><strong>Auto File Sync</strong>: When you add, edit, or delete files in the source folder, Orphanage updates only those files in the destination after a short delay.</li>
+        <li><strong>Import Rewriting</strong>: For TypeScript files, relative import paths are updated to reflect the flattened file structure.</li>
+        <li><strong>Compile Flag Processing</strong>: Remove or include code blocks based on destination-specific compile flags.</li>
+        <li><strong>Copy From Destination</strong>: Automatically copy files back to your working space based on your target destination.</li>
+        <li><strong>Ignore Files</strong>: Use <code>.orphanageIgnore</code> files to exclude files from processing (follows .gitignore syntax).</li>
+    </ul>
+    
+    <h3>Configuration</h3>
+    <p>Create an <code>orphanage.json</code> file in your project root to configure source folders, destinations, and compile flags.</p>
+    ]]></description>
+
+    <change-notes><![CDATA[
+    <h3>0.0.5</h3>
+    <ul>
+        <li>Updated compatibility for Rider 2024.3+</li>
+        <li>Fixed build issues and Java compatibility</li>
+        <li>Improved plugin stability</li>
+    </ul>
+    <h3>0.0.3</h3>
+    <ul>
+        <li>Initial Rider plugin release</li>
+        <li>Full feature parity with VSCode extension</li>
+        <li>Tool window for destination management</li>
+        <li>Auto-processing with file watching</li>
+    </ul>
+    ]]></change-notes>
+
+    <!-- Product and plugin compatibility requirements -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Application services -->
+        <applicationService serviceImplementation="com.nyght.orphanage.services.OrphanageService"/>
+        
+        <!-- Project services -->
+        <projectService serviceImplementation="com.nyght.orphanage.services.OrphanageProjectService"/>
+        
+        <!-- Tool window -->
+        <toolWindow id="Orphanage" 
+                    secondary="true" 
+                    anchor="right" 
+                    factoryClass="com.nyght.orphanage.ui.OrphanageToolWindowFactory"
+                    icon="AllIcons.Nodes.Folder"/>
+        
+        <!-- File listeners -->
+        <vfs.asyncListener implementation="com.nyght.orphanage.listeners.OrphanageFileListener"/>
+        
+        <!-- Settings -->
+        <projectConfigurable instance="com.nyght.orphanage.settings.OrphanageConfigurable"
+                           displayName="Orphanage"
+                           id="com.nyght.orphanage.settings"
+                           parentId="project.propVCSSupport.Mappings"/>
+        
+        <!-- Notification group -->
+        <notificationGroup id="Orphanage" displayType="BALLOON" key="notification.group.orphanage"/>
+    </extensions>
+
+    <actions>
+        <!-- Main menu actions -->
+        <group id="OrphanageGroup" text="Orphanage" popup="true">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            
+            <action id="OrphanageFlatten" 
+                    class="com.nyght.orphanage.actions.FlattenProjectAction"
+                    text="Flatten Project"
+                    description="Flatten all project files into destination directories"/>
+            
+            <action id="OrphanageCreateConfig" 
+                    class="com.nyght.orphanage.actions.CreateConfigAction"
+                    text="Create Default Config"
+                    description="Create a default orphanage.json configuration file"/>
+        </group>
+
+        <!-- Context menu actions -->
+        <group id="OrphanageProjectViewPopup">
+            <reference ref="OrphanageFlatten"/>
+            <reference ref="OrphanageCreateConfig"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+        </group>
+    </actions>
+</idea-plugin>

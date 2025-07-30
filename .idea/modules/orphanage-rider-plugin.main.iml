@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="orphanage-rider-plugin:main" external.linked.project.path="$MODULE_DIR$/../../rider-plugin" external.root.project.path="$MODULE_DIR$/../../rider-plugin" external.system.id="GRADLE" external.system.module.group="com.nyght.orphanage" external.system.module.type="sourceSet" external.system.module.version="0.0.3" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet external-system-id="GRADLE" type="kotlin-language" name="Kotlin">
+      <configuration version="5" platform="JVM 17" allPlatforms="JVM [17]" useProjectSettings="false" pureKotlinSourceFolders="S:\Projects\PlaySide\Orphanage\rider-plugin\src\test\kotlin;S:\Projects\PlaySide\Orphanage\rider-plugin\src\main\kotlin">
+        <compilerSettings />
+        <compilerArguments>
+          <flagArguments>
+            <flagArg name="allowNoSourceFiles" arg="true" />
+            <flagArg name="noReflect" arg="true" />
+            <flagArg name="noStdlib" arg="true" />
+          </flagArguments>
+          <stringArguments>
+            <stringArg name="destination" arg="$MODULE_DIR$/../../rider-plugin/build/classes/kotlin/main" />
+            <stringArg name="jvmTarget" arg="17" />
+            <stringArg name="moduleName" arg="orphanage-rider-plugin" />
+            <stringArg name="apiVersion" arg="1.6" />
+            <stringArg name="languageVersion" arg="1.9" />
+          </stringArguments>
+          <arrayArguments>
+            <arrayArg name="pluginClasspaths">
+              <args>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-jvm/1.9.10/de62c537edfe46edc9987d6bad393550690da01c/kotlin-scripting-jvm-1.9.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-common/1.9.10/83fd6c933c3fc24672350b0950311b7eaa3e33fc/kotlin-scripting-common-1.9.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.9.10/72812e8a368917ab5c0a5081b56915ffdfec93b7/kotlin-stdlib-1.9.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.9.10/dafaf2c27f27c09220cee312df10917d9a5d97ce/kotlin-stdlib-common-1.9.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.9.10/398513a8534701579cccaf5953ea914416b4696c/kotlin-script-runtime-1.9.10.jar</arg>
+              </args>
+            </arrayArg>
+            <arrayArg name="pluginOptions" />
+          </arrayArguments>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_17">
+    <output url="file://$MODULE_DIR$/../../rider-plugin/build/classes/kotlin/main" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../rider-plugin/src/main">
+      <sourceFolder url="file://$MODULE_DIR$/../../rider-plugin/src/main/kotlin" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../rider-plugin/src/main/resources" type="java-resource" />
+    </content>
+    <orderEntry type="jdk" jdkName="valhalla-ea-23" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.module:jackson-module-kotlin:2.15.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.15.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains:annotations:24.0.0" level="project" />
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: com.jetbrains:ideaIC:2023.2.5">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/ant/lib/ant.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/app.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/app-client.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/bouncy-castle.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/byte-buddy-agent.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/error-prone-annotations.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/external-system-rt.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/externalProcess-rt.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/forms_rt.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/groovy.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/grpc.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/idea_rt.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/intellij-coverage-agent-1.0.723.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/intellij-test-discovery.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/jps-model.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/jsch-agent.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/junit4.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/lib.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/lib-client.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/modules.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/platform-loader.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/product-client.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/protobuf.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/rd.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/stats.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/testFramework.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/util.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/util-8.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2023.2.5/30e9f22cc3cd8197ba1217cc1aa50a3914a2b873/ideaIC-2023.2.5/lib/util_rt.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.15.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-reflect:1.5.32" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.15.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.5.32" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.5.32" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
+  </component>
+</module>
